@@ -1,14 +1,16 @@
 package HappyCube;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CubeValidator {
     
     private static final int ROTATIONS = 4;
     private static final int FLIP_COUNT = 2;
-    private List<List<CubeFace>> results = new ArrayList<>();
+    private Set<List<CubeFace>> results = new HashSet<>();
     
     
     public void calculate(List<CubeFace> facesObj) {
@@ -28,7 +30,7 @@ public class CubeValidator {
             List<CubeFace> fixedFaces = copyList(fixedFaces2);
             List<CubeFace> facesRest = copyList(facesRest2);
             CubeFace currentFace = facesRest.get(faceIdx);
-            for(int k = 0; k < FLIP_COUNT; k++) {
+            for(int k = 0; k < currentFace.getFlips(); k++) {
                 for(int r = 0; r < ROTATIONS; r++) {
                     if(isMatch(fixedFaces, currentFace)) {
                         facesRest.remove(currentFace);
@@ -37,7 +39,7 @@ public class CubeValidator {
                             fixedFaces.remove(currentFace);
                             facesRest.add(faceIdx, currentFace);
                         } else {
-                            return true;
+//                            return true;
                         }
                     }
                     currentFace.rotate();
@@ -76,7 +78,7 @@ public class CubeValidator {
         return facesObj.stream().map(CubeFace::clone).collect(Collectors.toList());
     }
     
-    public List<List<CubeFace>> getResults() {
+    public Set<List<CubeFace>> getResults() {
         return results;
     }
 }

@@ -1,6 +1,7 @@
 package HappyCube;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -10,14 +11,15 @@ public class CubeFace {
     public List<Boolean> right = new ArrayList<>();
     public List<Boolean> down;
     public List<Boolean> left = new ArrayList<>();
-    private int rotates = 2;
+    private int flips;
     
     
-    public CubeFace(List<Boolean> up, List<Boolean> right, List<Boolean> down, List<Boolean> left) {
+    public CubeFace(List<Boolean> up, List<Boolean> right, List<Boolean> down, List<Boolean> left, int flips) {
         this.up = up;
         this.right = right;
         this.down = down;
         this.left = left;
+        this.flips = flips;
     }
     
     CubeFace(List<List<Boolean>> rowsList) {
@@ -30,6 +32,7 @@ public class CubeFace {
             left.add(row.get(0));
             right.add(row.get(row.size() - 1));
         }
+        this.flips = isFlippable() ? 2 : 1;
     }
     
     public CubeFace(Character[][] faces) {
@@ -54,7 +57,7 @@ public class CubeFace {
     
     @Override
     public CubeFace clone() {
-        return new CubeFace(up, right, down, left);
+        return new CubeFace(up, right, down, left, flips);
     }
     
     public boolean isRightMatchLeft(CubeFace toMatch) {
@@ -178,6 +181,27 @@ public class CubeFace {
         return res;
     }
     
+    public int getFlips() {
+        return flips;
+    }
+   
+    @Override
+    public boolean equals(Object o) {
+        return this.up.hashCode() == ((CubeFace) o).up.hashCode() &&
+                this.right.hashCode() == ((CubeFace) o).right.hashCode() &&
+                this.down.hashCode() == ((CubeFace) o).down.hashCode() &&
+                this.left.hashCode() == ((CubeFace) o).left.hashCode();
+    }
+    
+    @Override
+    public int hashCode() {
+        List<List<Boolean>> a = Arrays.asList(up, right, down, left);
+        return a.toString().hashCode();
+//        a.stream().map(side -> side.stream().map(b -> b ? 0 : 1));
+
+//        return Objects.hash(up, right, down, left);
+    }
+    
     private List<Boolean> rotateArray(List<Boolean> down) {
         List<Boolean> downRotated = new ArrayList<>();
         for(int i = 0; i < down.size(); i++) {
@@ -186,25 +210,11 @@ public class CubeFace {
         return downRotated;
     }
     
-    private boolean isFlippable(){
+    private boolean isFlippable() {
         CubeFace clone = clone();
         clone.flip();
-        if (clone.equals(this)) return false;
+        if(clone.hashCode() == this.hashCode()) return false;
         clone.rotate();
-        return clone.equals(this);
-    }
-    
-//    @Override
-//    public boolean equals(Object o) {
-//        if(this == o) return true;
-//        if(o == null || getClass() != o.getClass()) return false;
-//        CubeFace cubeFace = (CubeFace) o;
-//        return up.equals(cubeFace.up) && Objects.equals(right, cubeFace.right) && Objects.equals(down, cubeFace.down) && Objects.equals(left, cubeFace.left);
-        // TODO: TAMIR:
-//    }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hash(up, right, down, left);
+        return clone.hashCode() != this.hashCode();
     }
 }

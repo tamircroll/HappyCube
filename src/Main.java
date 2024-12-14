@@ -12,14 +12,14 @@ public class Main {
         Character[][][] failure = TestingData.getCharacters5();
     
         System.out.println("\n----------------------------\nTamir: Here: 1: \n");
-        new HappyCube().calculate(a);
+        new HappyCube().Run(a);
         System.out.println("\n----------------------------\nTamir: Here: 2: \n");
-        new HappyCube().calculate(b);
+        new HappyCube().Run(b);
         System.out.println("\n----------------------------\nTamir: Here: 3: \n");
-        new HappyCube().calculate(c);
+        new HappyCube().Run(c);
         System.out.println("\n----------------------------\nTamir: Here: 4: \n");
-        new HappyCube().calculate(d);
+        new HappyCube().Run(d);
         System.out.println("\n----------------------------\nTamir: Here: failure: \n");
-        new HappyCube().calculate(failure);
+        new HappyCube().Run(failure);
     }
 }
