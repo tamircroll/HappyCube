@@ -6,6 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static HappyCube.Utils.copyList;
+
 public class MySet extends HashSet<List<CubeFace>> {
     
     @Override
@@ -31,9 +33,5 @@ public class MySet extends HashSet<List<CubeFace>> {
             }
         }
         return true;
-    }
-    
-    private List<CubeFace> copyList(List<CubeFace> facesObj) {
-        return facesObj.stream().map(CubeFace::clone).collect(Collectors.toList());
     }
 }
