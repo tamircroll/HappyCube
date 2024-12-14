@@ -11,7 +11,7 @@ public class MySet extends HashSet<List<CubeFace>> {
     @Override
     public boolean add(List<CubeFace> b) {
         List<CubeFace> cubeFaces = copyList(b);
-        if(isContains(cubeFaces)) {
+        if(contains(cubeFaces)) {
             return false;
         }
         super.add(cubeFaces);
@@ -20,14 +20,11 @@ public class MySet extends HashSet<List<CubeFace>> {
     
     @Override
     public boolean contains(Object o) {
-        return isContains((List<CubeFace>) o);
-    }
-    
-    public boolean isContains(List<CubeFace> o) {
         if(size() == 0) return false;
-        boolean b = Arrays.stream(this.toArray()).anyMatch(c -> isTheSame((List<CubeFace>) c, o));
+        boolean b = Arrays.stream(this.toArray()).anyMatch(c -> isTheSame((List<CubeFace>) c, (List<CubeFace>) o));
         return b;
     }
+    
     
     private boolean isTheSame(List<CubeFace> next, List<CubeFace> o1) {
         for(int i = 0; i < next.size(); i++) {
