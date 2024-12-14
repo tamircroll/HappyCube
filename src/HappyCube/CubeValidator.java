@@ -36,8 +36,6 @@ public class CubeValidator {
                         if(!calculate(fixedFaces, facesRest)) {
                             fixedFaces.remove(currentFace);
                             facesRest.add(faceIdx, currentFace);
-                        } else {
-//                            return true;
                         }
                     }
                     currentFace.rotate();
