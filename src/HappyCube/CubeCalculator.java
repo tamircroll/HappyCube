@@ -9,7 +9,7 @@ import static HappyCube.Utils.copyList;
 public class CubeCalculator {
     
     private static final int ROTATIONS = 4;
-    private MySet results = new MySet();
+    private HappyCubeSet results = new HappyCubeSet();
     
     
     public void calculate(List<CubeFace> facesObj) {

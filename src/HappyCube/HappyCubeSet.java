@@ -7,7 +7,7 @@ import java.util.List;
 
 import static HappyCube.Utils.copyList;
 
-public class MySet extends HashSet<List<CubeFace>> {
+public class HappyCubeSet extends HashSet<List<CubeFace>> {
     
     @Override
     public boolean add(List<CubeFace> b) {
