@@ -3,7 +3,6 @@ package HappyCube;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CubeFace {
     
@@ -23,9 +22,6 @@ public class CubeFace {
     }
     
     CubeFace(List<List<Boolean>> rowsList) {
-        if(rowsList.size() != 5) {
-            throw new RuntimeException("Wrong number of Faces ! ! !");
-        }
         up = rowsList.get(0);
         down = rowsList.get(rowsList.size() - 1);
         for(List<Boolean> row : rowsList) {
@@ -161,24 +157,23 @@ public class CubeFace {
     
     @Override
     public String toString() {
-        String res = "";
-        for(int i = 0; i < up.size(); i++) {
-            res += up.get(i) ? "o" : " ";
+        StringBuilder res = new StringBuilder();
+        for(Boolean aBoolean : up) {
+            res.append(aBoolean ? "o" : " ");
         }
-        res += "\n";
-        
+        res.append("\n");
         
         for(int i = 1; i < left.size() - 1; i++) {
-            res += left.get(i) ? "oooo" : " ooo";
-            res += right.get(i) ? "o\n" : " \n";
+            res.append(Boolean.TRUE.equals(left.get(i)) ? "oooo" : " ooo");
+            res.append(Boolean.TRUE.equals(right.get(i)) ? "o\n" : " \n");
         }
         
         for(int i = 0; i < down.size(); i++) {
-            res += down.get(i) ? "o" : " ";
+            res.append(Boolean.TRUE.equals(down.get(i)) ? "o" : " ");
         }
-        res += "\n";
+        res.append("\n");
         
-        return res;
+        return res.toString();
     }
     
     public int getFlips() {
