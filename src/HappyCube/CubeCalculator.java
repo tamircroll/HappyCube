@@ -6,7 +6,7 @@ import java.util.Set;
 
 import static HappyCube.Utils.copyList;
 
-public class CubeValidator {
+public class CubeCalculator {
     
     private static final int ROTATIONS = 4;
     private MySet results = new MySet();
