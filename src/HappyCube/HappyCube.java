@@ -10,8 +10,11 @@ public class HappyCube {
         CubeValidator cubeBuilder = new CubeValidator();
         List<CubeFace> m_facesObj = Arrays.stream(faces).map(CubeFace::new).collect(Collectors.toList());
         cubeBuilder.calculate(m_facesObj);
+        System.out.println("Tamir: total cubes: " + cubeBuilder.getResults().size());
+
         cubeBuilder.getResults().forEach(r -> {
             r.forEach(System.out::println);
+            
             System.out.println("\n-----------------------------------------------------------\n");
         });
     }

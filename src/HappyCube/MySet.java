@@ -25,7 +25,6 @@ public class MySet extends HashSet<List<CubeFace>> {
         return b;
     }
     
-    
     private boolean isTheSame(List<CubeFace> next, List<CubeFace> o1) {
         for(int i = 0; i < next.size(); i++) {
             if(next.get(i).hashCode() != o1.get(i).hashCode()) {
