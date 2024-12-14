@@ -21,8 +21,7 @@ public class MySet extends HashSet<List<CubeFace>> {
     @Override
     public boolean contains(Object o) {
         if(size() == 0) return false;
-        boolean b = Arrays.stream(this.toArray()).anyMatch(c -> isTheSame((List<CubeFace>) c, (List<CubeFace>) o));
-        return b;
+        return Arrays.stream(this.toArray()).anyMatch(c -> isTheSame((List<CubeFace>) c, (List<CubeFace>) o));
     }
     
     private boolean isTheSame(List<CubeFace> next, List<CubeFace> o1) {
