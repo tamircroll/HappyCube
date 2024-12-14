@@ -16,8 +16,6 @@ public class CubeValidator {
         List<CubeFace> facesClone = copyList(facesObj);
         CubeFace remove = facesClone.remove(0);
         fixedFace.add(remove);
-        if (calculate(fixedFace, facesClone)) return;
-        remove.flip();
         calculate(fixedFace, facesClone);
     }
     
