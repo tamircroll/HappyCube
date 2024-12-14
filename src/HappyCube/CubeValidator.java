@@ -10,30 +10,38 @@ public class CubeValidator {
     private static final int FLIP_COUNT = 2;
     private List<List<CubeFace>> results = new ArrayList<>();
     
-    public boolean calculate(List<CubeFace> fixedFacesOrig, List<CubeFace> facesRestOrig) {
-//        fixedFacesOrig.add(facesRestOrig.remove(0));
-        return calculate(fixedFacesOrig, facesRestOrig, 1);
+    
+    public void calculate(List<CubeFace> facesObj) {
+        ArrayList fixedFace = new ArrayList<>();
+        List<CubeFace> facesClone = copyList(facesObj);
+        CubeFace remove = facesClone.remove(0);
+        fixedFace.add(remove);
+        if (calculate(fixedFace, facesClone)) return;
+        remove.flip();
+        calculate(fixedFace, facesClone);
     }
     
-    public boolean calculate(List<CubeFace> fixedFacesOrig, List<CubeFace> facesRestOrig, int rotations) {
-        if(facesRestOrig.isEmpty()) {
-            results.add(fixedFacesOrig);
+    boolean calculate(List<CubeFace> fixedFaces2, List<CubeFace> facesRest2) {
+        if(facesRest2.isEmpty()) {
+            results.add(fixedFaces2);
             return true;
         }
-        for(int j = 0; j < facesRestOrig.size(); j++) {
-            List<CubeFace> fixedFaces = copyList(fixedFacesOrig);
-            List<CubeFace> facesRest = copyList(facesRestOrig);
-            CubeFace currentFace = facesRest.get(j);
+        for(int faceIdx = 0; faceIdx < facesRest2.size(); faceIdx++) {
+            List<CubeFace> fixedFaces = copyList(fixedFaces2);
+            List<CubeFace> facesRest = copyList(facesRest2);
+            CubeFace currentFace = facesRest.get(faceIdx);
             for(int k = 0; k < FLIP_COUNT; k++) {
-                for(int r = 0; r < rotations; r++) {
-                    if(!isMatch(fixedFaces, currentFace)) continue;
-                    facesRest.remove(currentFace);
-                    fixedFaces.add(currentFace);
-                    if(calculate(fixedFaces, facesRest, ROTATIONS)) {
-                        return true;
+                for(int r = 0; r < ROTATIONS; r++) {
+                    if(isMatch(fixedFaces, currentFace)) {
+                        facesRest.remove(currentFace);
+                        fixedFaces.add(currentFace);
+                        if(!calculate(fixedFaces, facesRest)) {
+                            fixedFaces.remove(currentFace);
+                            facesRest.add(faceIdx, currentFace);
+                        } else {
+                            return true;
+                        }
                     }
-                    fixedFaces.remove(currentFace);
-                    facesRest.add(j, currentFace);
                     currentFace.rotate();
                 }
                 currentFace.flip();
@@ -44,9 +52,7 @@ public class CubeValidator {
     
     private boolean isMatch(List<CubeFace> fixedFaces, CubeFace newFace) {
         int idx = fixedFaces.size();
-        if(idx == 0) {
-            return true;
-        } else if(idx == 1) {
+        if(idx == 1) {
             return fixedFaces.get(0).isRightMatchLeft(newFace);
         } else if(idx == 2) {
             return fixedFaces.get(1).isRightMatchLeft(newFace);
@@ -67,7 +73,6 @@ public class CubeValidator {
         
         return false;
     }
-    
     
     private List<CubeFace> copyList(List<CubeFace> facesObj) {
         return facesObj.stream().map(CubeFace::clone).collect(Collectors.toList());

@@ -2,6 +2,7 @@ package HappyCube;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class CubeFace {
     
@@ -9,6 +10,7 @@ public class CubeFace {
     public List<Boolean> right = new ArrayList<>();
     public List<Boolean> down;
     public List<Boolean> left = new ArrayList<>();
+    private int rotates = 2;
     
     
     public CubeFace(List<Boolean> up, List<Boolean> right, List<Boolean> down, List<Boolean> left) {
@@ -182,5 +184,27 @@ public class CubeFace {
             downRotated.add(down.get(down.size() - i - 1));
         }
         return downRotated;
+    }
+    
+    private boolean isFlippable(){
+        CubeFace clone = clone();
+        clone.flip();
+        if (clone.equals(this)) return false;
+        clone.rotate();
+        return clone.equals(this);
+    }
+    
+//    @Override
+//    public boolean equals(Object o) {
+//        if(this == o) return true;
+//        if(o == null || getClass() != o.getClass()) return false;
+//        CubeFace cubeFace = (CubeFace) o;
+//        return up.equals(cubeFace.up) && Objects.equals(right, cubeFace.right) && Objects.equals(down, cubeFace.down) && Objects.equals(left, cubeFace.left);
+        // TODO: TAMIR:
+//    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hash(up, right, down, left);
     }
 }

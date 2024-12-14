@@ -10,18 +10,16 @@ public class Main {
         Character[][][] c = TestingData.getCharacters3();
         Character[][][] d = TestingData.getCharacters4();
         Character[][][] failure = TestingData.getCharacters5();
-
-        System.out.println("\n----------------------------\nTamir: Here: 1: \n");
-        new HappyCube(a).calculate();
-        System.out.println("\n----------------------------\nTamir: Here: 2: \n");
-        new HappyCube(b).calculate();
-        System.out.println("\n----------------------------\nTamir: Here: 3: \n");
-        new HappyCube(c).calculate();
-        System.out.println("\n----------------------------\nTamir: Here: 4: \n");
-        new HappyCube(d).calculate();
-        System.out.println("\n----------------------------\nTamir: Here: failure: \n");
-        new HappyCube(failure).calculate();
-    }
     
-
+        System.out.println("\n----------------------------\nTamir: Here: 1: \n");
+        new HappyCube().calculate(a);
+        System.out.println("\n----------------------------\nTamir: Here: 2: \n");
+        new HappyCube().calculate(b);
+        System.out.println("\n----------------------------\nTamir: Here: 3: \n");
+        new HappyCube().calculate(c);
+        System.out.println("\n----------------------------\nTamir: Here: 4: \n");
+        new HappyCube().calculate(d);
+        System.out.println("\n----------------------------\nTamir: Here: failure: \n");
+        new HappyCube().calculate(failure);
+    }
 }
