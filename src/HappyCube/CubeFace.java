@@ -3,7 +3,7 @@ package HappyCube;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class CubeFace {
     
@@ -196,10 +196,14 @@ public class CubeFace {
     @Override
     public int hashCode() {
         List<List<Boolean>> a = Arrays.asList(up, right, down, left);
-        return a.toString().hashCode();
-//        a.stream().map(side -> side.stream().map(b -> b ? 0 : 1));
-
-//        return Objects.hash(up, right, down, left);
+        var result = "";
+        for(int i = 0; i < a.size(); i++) {
+            for(int j = 0; j < a.get(i).size(); j++) {
+                Boolean b = a.get(i).get(j);
+                result += (b? "1" : "0");
+            }
+        }
+        return result.hashCode();
     }
     
     private List<Boolean> rotateArray(List<Boolean> down) {

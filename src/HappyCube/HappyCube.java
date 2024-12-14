@@ -7,11 +7,6 @@ import java.util.stream.Collectors;
 
 public class HappyCube {
     
-    
-    private static final int ROTATIONS = 4;
-    private static final int FLIP_COUNT = 2;
-    private List<List<CubeFace>> result = new ArrayList<>();
-    
     public void Run(Character[][][] faces) {
         CubeValidator cubeBuilder = new CubeValidator();
         List<CubeFace> m_facesObj = Arrays.stream(faces).map(CubeFace::new).collect(Collectors.toList());

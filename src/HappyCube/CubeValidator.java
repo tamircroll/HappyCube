@@ -1,7 +1,6 @@
 package HappyCube;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,8 +8,7 @@ import java.util.stream.Collectors;
 public class CubeValidator {
     
     private static final int ROTATIONS = 4;
-    private static final int FLIP_COUNT = 2;
-    private Set<List<CubeFace>> results = new HashSet<>();
+    private MySet results = new MySet();
     
     
     public void calculate(List<CubeFace> facesObj) {
