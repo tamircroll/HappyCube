@@ -179,11 +179,11 @@ public class CubeFace {
         return res.toString();
     }
     
-    public int getFlipsCount() {
+    public int flipsCount() {
         return flips;
     }
     
-    public int getRotationCount() {
+    public int rotationCount() {
         return rotates;
     }
     
