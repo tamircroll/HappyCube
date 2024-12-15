@@ -16,14 +16,14 @@ public class CubeCalculator {
             return true;
         }
         for(int faceIdx = 0; faceIdx < builder.getUnMatchSize(); faceIdx++) {
-            CubeBuilder validatorClone = builder.getClone();
-            CubeFace faceToMatch = validatorClone.getUnMatched(faceIdx);
+            CubeBuilder builderClone = builder.getClone();
+            CubeFace faceToMatch = builderClone.getUnMatched(faceIdx);
             for(int k = 0; k < faceToMatch.flipsCount(); k++) {
                 for(int r = 0; r < faceToMatch.rotationCount(); r++) {
-                    if(validatorClone.isMatch(faceToMatch)) {
-                        validatorClone.moveToMatched(faceToMatch);
-                        if(!calculate(validatorClone)) {
-                            validatorClone.moveToUnMatched(faceToMatch, faceIdx);
+                    if(builderClone.isMatch(faceToMatch)) {
+                        builderClone.moveToMatched(faceToMatch);
+                        if(!calculate(builderClone)) {
+                            builderClone.moveToUnMatched(faceToMatch, faceIdx);
                         }
                     }
                     faceToMatch.rotate();
