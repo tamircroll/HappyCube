@@ -5,24 +5,24 @@ import java.util.List;
 
 import static HappyCube.Utils.copyList;
 
-public class CubeValidator {
+public class CubeBuilder {
     final List<CubeFace> matchedFaces;
     final List<CubeFace> UnmatchedFaces;
     
-    public CubeValidator(List<CubeFace> faces) {
+    public CubeBuilder(List<CubeFace> faces) {
         matchedFaces = new ArrayList<CubeFace>();
         matchedFaces.add(faces.getFirst());
         UnmatchedFaces = new ArrayList<CubeFace>(faces.subList(1, faces.size()));
     }
     
-    public CubeValidator(List<CubeFace> matchedFaces, List<CubeFace> UnmatchedFaces) {
+    public CubeBuilder(List<CubeFace> matchedFaces, List<CubeFace> UnmatchedFaces) {
         this.matchedFaces = matchedFaces;
         this.UnmatchedFaces = UnmatchedFaces;
     }
     
-    public CubeValidator getClone() {
+    public CubeBuilder getClone() {
         try {
-            return (CubeValidator) clone();
+            return (CubeBuilder) clone();
         } catch (CloneNotSupportedException e) {
             throw new RuntimeException(e);
         }
@@ -81,6 +81,6 @@ public class CubeValidator {
     
     @Override
     protected Object clone() throws CloneNotSupportedException {
-        return new CubeValidator(copyList(matchedFaces), copyList(UnmatchedFaces));
+        return new CubeBuilder(copyList(matchedFaces), copyList(UnmatchedFaces));
     }
 }
