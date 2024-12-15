@@ -12,9 +12,8 @@ public class HappyCubeSet extends HashSet<List<CubeFace>> {
     @Override
     public boolean add(List<CubeFace> b) {
         List<CubeFace> cubeFaces = copyList(b);
-        if(contains(cubeFaces)) {
-            return false;
-        }
+        if(contains(cubeFaces)) return false;
+        
         super.add(cubeFaces);
         return true;
     }
@@ -22,7 +21,9 @@ public class HappyCubeSet extends HashSet<List<CubeFace>> {
     @Override
     public boolean contains(Object o) {
         if(size() == 0) return false;
-        return Arrays.stream(this.toArray()).anyMatch(c -> isTheSame((List<CubeFace>) c, (List<CubeFace>) o));
+        return Arrays
+                .stream(this.toArray())
+                .anyMatch(c -> isTheSame((List<CubeFace>) c, (List<CubeFace>) o));
     }
     
     private boolean isTheSame(List<CubeFace> next, List<CubeFace> o1) {
