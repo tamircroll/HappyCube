@@ -26,7 +26,6 @@ public class CubeCalculator {
                             builderClone.moveToUnMatched(faceToMatch, faceIdx);
                         }
                     }
-                    builder.removeIfExists(faceToMatch);
                     faceToMatch.rotate();
                 }
                 faceToMatch.flip();
