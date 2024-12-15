@@ -5,12 +5,14 @@ import java.util.Set;
 
 public class CubeCalculator {
     private HappyCubeSet results = new HappyCubeSet();
+    int c = 0;
     
     public void calculate(List<CubeFace> facesObj) {
         calculate(new CubeBuilder(facesObj));
     }
     
     boolean calculate(CubeBuilder builder) {
+        c++;
         if(!builder.IsCubeDone()) {
             results.add(builder.getMatched());
             return true;
@@ -22,9 +24,8 @@ public class CubeCalculator {
                 for(int r = 0; r < faceToMatch.rotationCount(); r++) {
                     if(builderClone.isMatch(faceToMatch)) {
                         builderClone.moveToMatched(faceToMatch);
-                        if(!calculate(builderClone)) {
-                            builderClone.moveToUnMatched(faceToMatch, faceIdx);
-                        }
+                        calculate(builderClone);
+                        builderClone.moveToUnMatched(faceToMatch, faceIdx);
                     }
                     faceToMatch.rotate();
                 }
