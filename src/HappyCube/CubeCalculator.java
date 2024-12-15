@@ -18,8 +18,8 @@ public class CubeCalculator {
         for(int faceIdx = 0; faceIdx < builder.getUnMatchSize(); faceIdx++) {
             CubeBuilder validatorClone = builder.getClone();
             CubeFace faceToMatch = validatorClone.getUnMatched(faceIdx);
-            for(int k = 0; k < faceToMatch.getFlips(); k++) {
-                for(int r = 0; r < faceToMatch.getRotates(); r++) {
+            for(int k = 0; k < faceToMatch.getFlipsCount(); k++) {
+                for(int r = 0; r < faceToMatch.getRotationCount(); r++) {
                     if(validatorClone.isMatch(faceToMatch)) {
                         validatorClone.moveToMatched(faceToMatch);
                         if(!calculate(validatorClone)) {
