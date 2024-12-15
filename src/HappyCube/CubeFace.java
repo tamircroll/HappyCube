@@ -179,7 +179,7 @@ public class CubeFace {
     public int getFlips() {
         return flips;
     }
-   
+    
     @Override
     public boolean equals(Object o) {
         return this.up.hashCode() == ((CubeFace) o).up.hashCode() &&
@@ -195,7 +195,7 @@ public class CubeFace {
         for(int i = 0; i < a.size(); i++) {
             for(int j = 0; j < a.get(i).size(); j++) {
                 Boolean b = a.get(i).get(j);
-                result += (b? "1" : "0");
+                result += (b ? "1" : "0");
             }
         }
         return result.hashCode();

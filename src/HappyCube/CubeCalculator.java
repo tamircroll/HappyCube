@@ -15,16 +15,16 @@ public class CubeCalculator {
     
     boolean calculate(CubeValidator validator) {
         if(!validator.IsCubeDone()) {
-            results.add(validator.getFixed());
+            results.add(validator.getMatched());
             return true;
         }
-        for(int faceIdx = 0; faceIdx < validator.getToMatchSize(); faceIdx++) {
+        for(int faceIdx = 0; faceIdx < validator.getUnMatchSize(); faceIdx++) {
             CubeValidator validatorClone = validator.getClone();
             CubeFace faceToMatch = validatorClone.getUnMatched(faceIdx);
             for(int k = 0; k < faceToMatch.getFlips(); k++) {
                 for(int r = 0; r < ROTATIONS; r++) {
                     if(validatorClone.isMatch(faceToMatch)) {
-                        validatorClone.moveToFixed(faceToMatch);
+                        validatorClone.moveToMatched(faceToMatch);
                         if(!calculate(validatorClone)) {
                             validatorClone.moveToUnMatched(faceToMatch, faceIdx);
                         }
