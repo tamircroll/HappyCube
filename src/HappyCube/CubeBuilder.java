@@ -83,4 +83,8 @@ public class CubeBuilder {
     protected Object clone() throws CloneNotSupportedException {
         return new CubeBuilder(copyList(matchedFaces), copyList(UnmatchedFaces));
     }
+    
+    public void removeIfExists(CubeFace faceToRemove) {
+        matchedFaces.remove(faceToRemove);
+    }
 }
