@@ -30,8 +30,31 @@ public class CubeFace {
             left.add(row.get(0));
             right.add(row.get(row.size() - 1));
         }
-        this.flips = isFlippable() ? 2 : 1;
-        this.rotates = isRotatable() ? 4 : 2;
+        setFlips();
+        setRotations();
+    }
+    
+    private void setFlips() {
+        CubeFace clone = clone();
+        clone.flip();
+        if(clone.hashCode() == this.hashCode()) {
+            flips = 1;
+            return;
+        }
+        clone.rotate();
+        flips = clone.hashCode() == this.hashCode() ? 1 : 2;
+        
+    }
+    
+    private void setRotations() {
+        CubeFace clone = clone();
+        clone.rotate();
+        if(clone.hashCode() == this.hashCode()) {
+            rotates = 1;
+            return;
+        }
+        clone.rotate();
+        rotates = (clone.hashCode() == this.hashCode()) ? 2 : 4;
     }
     
     public CubeFace(Character[][] faces) {
@@ -214,22 +237,5 @@ public class CubeFace {
             downRotated.add(down.get(down.size() - i - 1));
         }
         return downRotated;
-    }
-    
-    private boolean isFlippable() {
-        CubeFace clone = clone();
-        clone.flip();
-        if(clone.hashCode() == this.hashCode()) return false;
-        clone.rotate();
-        return clone.hashCode() != this.hashCode();
-    }
-    
-    private boolean isRotatable() {
-        CubeFace clone = clone();
-        clone.rotate();
-        clone.rotate();
-        if(clone.hashCode() == this.hashCode()) return false;
-        clone.rotate();
-        return clone.hashCode() != this.hashCode();
     }
 }

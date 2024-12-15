@@ -14,7 +14,6 @@ public class HappyCube {
         
         cubeBuilder.getResults().forEach(r -> {
             r.forEach(System.out::println);
-            
             System.out.println("\n-----------------------------------------------------------\n");
         });
     }
